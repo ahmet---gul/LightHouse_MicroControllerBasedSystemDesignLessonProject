@@ -1,0 +1,131 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/25/2015  01:53:35  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj TO Micro_Project RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (STARTUP)
+
+
+LINK MAP OF MODULE:  Micro_Project (STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     00A3H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Micro_Project (STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        STARTUP
+  C:001AH         SYMBOL        BEKLET
+  C:005DH         SYMBOL        FIFTY_MS
+  C:005BH         SYMBOL        HALF_SEC
+  D:00A8H         SYMBOL        IE
+  B:0088H.3       SYMBOL        IE1
+  C:0021H         SYMBOL        INT_TERK
+  B:0088H.2       SYMBOL        IT1
+  C:006CH         SYMBOL        LOOP_S
+  C:0095H         SYMBOL        MAIN
+  C:0071H         SYMBOL        MS_FIFTY
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  C:006FH         SYMBOL        SEC_HALF
+  C:0080H         SYMBOL        S_LOOP
+  B:0088H.5       SYMBOL        TF0
+  B:0088H.7       SYMBOL        TF1
+  D:008CH         SYMBOL        TH0
+  D:008DH         SYMBOL        TH1
+  D:008AH         SYMBOL        TL0
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  B:0088H.6       SYMBOL        TR1
+  C:0029H         SYMBOL        YAK1
+  C:002FH         SYMBOL        YAK2
+  C:0035H         SYMBOL        YAK3
+  C:003BH         SYMBOL        YAK4
+  C:0041H         SYMBOL        YAK5
+  C:0047H         SYMBOL        YAK6
+  C:004DH         SYMBOL        YAK7
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/25/2015  01:53:35  PAGE 2
+
+
+  C:0053H         SYMBOL        YAK8
+  C:0000H         LINE#         2
+  C:0013H         LINE#         6
+  C:0016H         LINE#         7
+  C:0018H         LINE#         8
+  C:001AH         LINE#         9
+  C:001DH         LINE#         10
+  C:001FH         LINE#         11
+  C:0021H         LINE#         14
+  C:0024H         LINE#         15
+  C:0026H         LINE#         16
+  C:0028H         LINE#         17
+  C:0029H         LINE#         20
+  C:002BH         LINE#         21
+  C:002DH         LINE#         22
+  C:002FH         LINE#         24
+  C:0031H         LINE#         25
+  C:0033H         LINE#         26
+  C:0035H         LINE#         28
+  C:0037H         LINE#         29
+  C:0039H         LINE#         30
+  C:003BH         LINE#         32
+  C:003DH         LINE#         33
+  C:003FH         LINE#         34
+  C:0041H         LINE#         36
+  C:0043H         LINE#         37
+  C:0045H         LINE#         38
+  C:0047H         LINE#         40
+  C:0049H         LINE#         41
+  C:004BH         LINE#         42
+  C:004DH         LINE#         44
+  C:004FH         LINE#         45
+  C:0051H         LINE#         46
+  C:0053H         LINE#         48
+  C:0055H         LINE#         49
+  C:0057H         LINE#         50
+  C:0059H         LINE#         51
+  C:005BH         LINE#         53
+  C:005DH         LINE#         54
+  C:005FH         LINE#         55
+  C:0062H         LINE#         56
+  C:0065H         LINE#         57
+  C:0067H         LINE#         58
+  C:006AH         LINE#         59
+  C:006CH         LINE#         60
+  C:006EH         LINE#         61
+  C:006FH         LINE#         63
+  C:0071H         LINE#         65
+  C:0073H         LINE#         66
+  C:0076H         LINE#         67
+  C:0079H         LINE#         68
+  C:007BH         LINE#         69
+  C:007EH         LINE#         70
+  C:0080H         LINE#         71
+  C:0082H         LINE#         72
+  C:0095H         LINE#         77
+  C:0098H         LINE#         78
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/25/2015  01:53:35  PAGE 3
+
+
+  C:009BH         LINE#         81
+  C:009EH         LINE#         82
+  C:00A0H         LINE#         84
+  -------         ENDMOD        STARTUP
+
+Program Size: data=8.0 xdata=0 code=163
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

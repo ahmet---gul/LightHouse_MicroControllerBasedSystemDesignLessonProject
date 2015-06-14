@@ -1,0 +1,143 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              05/25/2015 01:53:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN STARTUP.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+0000 020095            2             LJMP MAIN ; bypass interrupt vector table
+                       3             ; ISR for hardware interrupt INT1 to turn on the LED
+0013                   4         ORG 0013H ; INT1 ISR
+                       5             ;; ISR ye girince butun ledler yakiliyor
+0013 75A0FF            6             MOV P2 , #11111111B 
+0016 116F              7         ACALL SEC_HALF                                                 
+0018 D292              8             SETB P1.2                                  
+001A 308BFD            9         BEKLET: JNB ie1 , BEKLET                     
+001D C292             10             CLR  P1.2                                  
+001F 116F             11         ACALL SEC_HALF                                                  
+                      12     
+0021                  13             INT_TERK: 
+0021 75A000           14             MOV P2 , #00H  
+0024 C28B             15             clr ie1 ; tusa basilinca ie1 1 olmustu fakat ilk tusa basilmada ISR cikilmadigi ici
+                             n tekrar ISR'ye girmesin diye sifirlaniyor
+0026 C28A             16             clr it1
+0028 32               17             RETI ; return from ISR   
+                      18     
+0029                  19             YAK1:
+0029 D2A0             20             SETB P2.0                       ; 1.led yakiliyor
+002B 115B             21         ACALL HALF_SEC              ; timer1 ile bekletiliyor
+002D C2A0             22             CLR  P2.0                ; 1.led sonduruluyor                                   
+002F                  23             YAK2:                                    
+002F D2A1             24             SETB P2.1                       ; 2.led yakiliyor
+0031 115B             25             ACALL HALF_SEC          ; timer1 ile bekletiliyor
+0033 C2A1             26             CLR  P2.1               ; 2.led sonduruluyor                                     
+0035                  27             YAK3:
+0035 D2A2             28             SETB P2.2                       ; 3.led yakiliyor
+0037 115B             29             ACALL HALF_SEC          ; timer1 ile bekletiliyor
+0039 C2A2             30             CLR  P2.2                       ; 3.led sonduruluyor    
+003B                  31         YAK4:
+003B D2A3             32             SETB P2.3                       ; 4.led yakiliyor
+003D 115B             33         ACALL HALF_SEC              ; timer1 ile bekletiliyor
+003F C2A3             34             CLR  P2.3                ; 4.led sonduruluyor   
+0041                  35             YAK5:
+0041 D2A4             36             SETB P2.4                       ; 5.led yakiliyor
+0043 115B             37         ACALL HALF_SEC              ; 1 saniye bekleniyor
+0045 C2A4             38             CLR  P2.4                ; 5.led sonduruluyor   
+0047                  39             YAK6:
+0047 D2A5             40             SETB P2.5                       ; 6.led yakiliyor
+0049 115B             41         ACALL HALF_SEC              ; timer1 ile bekletiliyor
+004B C2A5             42             CLR  P2.5                ; 6.led sonduruluyor   
+004D                  43             YAK7:
+004D D2A6             44             SETB P2.6                       ; 7.led yakiliyor
+004F 115B             45         ACALL HALF_SEC              ; timer1 ile bekletiliyor
+0051 C2A6             46             CLR  P2.6                ; 7.led sonduruluyor   
+0053                  47             YAK8:
+0053 D2A7             48             SETB P2.7                       ; 8.led yakiliyor
+0055 115B             49         ACALL HALF_SEC              ; timer1 ile bekletiliyor
+0057 C2A7             50             CLR  P2.7                ; 8.led sonduruluyor   
+0059 80CE             51             SJMP YAK1          
+                      52                     
+005B 7802             53             HALF_SEC:  MOV R0 , #02H                 
+005D C28E             54             FIFTY_MS:  CLR TR1
+005F 758D3C           55                                MOV TH1 , #03CH
+0062 758BB0           56                                MOV TL1 , #0B0H
+0065 D28E             57                                SETB TR1
+A51 MACRO ASSEMBLER  STARTUP                                                              05/25/2015 01:53:33 PAGE     2
+
+0067 308FFD           58                                JNB TF1 , $ ; TF1 1 olana kadar bekle
+006A C28F             59                                CLR TF1                                                         
+                                     
+006C D8EF             60             LOOP_S :   DJNZ  R0 , FIFTY_MS
+006E 22               61                                RET  
+                      62                                
+006F 7F05             63             SEC_HALF:  MOV R7 , #05H                  
+0071                  64             MS_FIFTY:   
+0071 C28C             65                        CLR TR0
+0073 758C3C           66                        MOV TH0, #03CH
+0076 758AB0           67                                MOV TL0, #0B0H
+0079 D28C             68                                SETB TR0
+007B 308DFD           69                                JNB TF0 , $ ; TF0 1 olana kadar bekle
+007E C28D             70                                CLR TF0
+0080 DFEF             71             S_LOOP :   DJNZ R7 , MS_FIFTY
+0082 22               72                                RET
+                      73                                        
+                      74                                                        
+                      75          ; MAIN program for initialization
+0095                  76             ORG 0095H
+0095 75A884           77             MAIN: MOV IE , #10000100B ; enable external INT1
+0098 758911           78         MOV TMOD , #11H ; timer 1 icin mod 01 , timer0 mod 01
+                      79     
+                      80             ;;Portlari temizliyoruz
+009B 75A000           81         MOV P2 , #00H       
+009E C292             82         CLR P1.2
+                      83                        
+00A0 020029           84             LJMP YAK1  ; 1.ledi yakmak icin atlaniyor
+                      85         END
+A51 MACRO ASSEMBLER  STARTUP                                                              05/25/2015 01:53:33 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BEKLET . . . . . .  C ADDR   001AH   A   
+FIFTY_MS . . . . .  C ADDR   005DH   A   
+HALF_SEC . . . . .  C ADDR   005BH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IE1. . . . . . . .  B ADDR   0088H.3 A   
+INT_TERK . . . . .  C ADDR   0021H   A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+LOOP_S . . . . . .  C ADDR   006CH   A   
+MAIN . . . . . . .  C ADDR   0095H   A   
+MS_FIFTY . . . . .  C ADDR   0071H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SEC_HALF . . . . .  C ADDR   006FH   A   
+S_LOOP . . . . . .  C ADDR   0080H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+YAK1 . . . . . . .  C ADDR   0029H   A   
+YAK2 . . . . . . .  C ADDR   002FH   A   
+YAK3 . . . . . . .  C ADDR   0035H   A   
+YAK4 . . . . . . .  C ADDR   003BH   A   
+YAK5 . . . . . . .  C ADDR   0041H   A   
+YAK6 . . . . . . .  C ADDR   0047H   A   
+YAK7 . . . . . . .  C ADDR   004DH   A   
+YAK8 . . . . . . .  C ADDR   0053H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
